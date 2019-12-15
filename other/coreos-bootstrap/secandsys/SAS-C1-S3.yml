@@ -1,40 +1,40 @@
 #cloud-config
-hostname: APPTV-C1-S3
+hostname: SAS-C1-S3
 
 write_files:
 # Bond
-  -  path: /etc/systemd/network/private.netdev
-     permissions: 0644
-     owner: root
-     content: |
-       [NetDev]
-       Name=bond_private
-       Kind=bond
- 
-       [Bond]
-       Mode=balance-rr
+#  -  path: /etc/systemd/network/private.netdev
+#     permissions: 0644
+#     owner: root
+#     content: |
+#       [NetDev]
+#       Name=bond_private
+#       Kind=bond
+# 
+#       [Bond]
+#       Mode=balance-rr
+#
+#  -  path: /etc/systemd/network/bond_private.network
+#     permissions: 0644
+#     owner: root
+#     content: |
+#       [Match]
+#       Name=eno49 eno50
 
-  -  path: /etc/systemd/network/bond_private.network
-     permissions: 0644
-     owner: root
-     content: |
-       [Match]
-       Name=eno49 eno50
-
-       [Network]
-       Bond=bond_private
+#       [Network]
+#       Bond=bond_private
 
 # VLAN
-  -  path: /etc/systemd/network/vlans_private.network
-     permissions: 0644
-     owner: root
-     content: |
-       [Match]
-       Name=bond_private
+#  -  path: /etc/systemd/network/vlans_private.network
+#     permissions: 0644
+#     owner: root
+#     content: |
+#       [Match]
+#       Name=bond_private
  
-       [Network]
-       VLAN=vlan_management
-       BindCarrier=eno49 eno50
+#       [Network]
+#       VLAN=vlan_management
+#       BindCarrier=eno49 eno50
 
   -  path: /etc/systemd/network/management.netdev
      permissions: 0644
@@ -56,8 +56,8 @@ write_files:
        Name=vlan_management
 
        [Network]
-       Address=192.168.116.56/24
-       Gateway=192.168.116.254
+       Address=192.168.1.102/24
+       Gateway=192.168.1.102
        DNS=8.8.8.8
 
 coreos:
@@ -66,6 +66,5 @@ coreos:
       command: restart
 
 ssh_authorized_keys:
-  - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDHXS6Dd4Eek7Z+vdvLUwXFsuYqHJdx56+ZJvIRu3LXCQS3j/eAJIJtXUu8zhMUFIGAPm1cPN6PoLwl7UskhG4BFh63m5cgkN20ey19rjq88vlIfM3xEQimbwbHMZkgPdkt47F8RPI8/lXPAdaQ7q2ec/jpg4rcJpMowwCqe/ZKlDlZGpRHEB21yi/oCCtu3vIM/jLvWxtx6Mn2yD+IQkGNccYmgiGLPRXVIwaZbh6yKWzmJIpTNN4RbjF/f8kGEEKy9XCs/BERX65nFvZ9YZhi1ERNX3chvMilFFKGItegHfDFVwi5NG9Tfq0HsP6N5UYIW0cvqGqcFnOqF1gJ4BCL anxo.beltran.alvarez@IP.NETCOM-2016-04-12"
-  - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDlSi9xouAOOX+TyJ7Dl4mmiCsI7ioXIgBDTx4pj+ZBLYtXg6+MG/mGIhd4nP9a3UAXZVSNzAEio6Sw64rj8A0tNHC16BuvcwtKBrkoU3hsqr7EeRd1F0c1YEFkiCKK7DSld3J0e2hrD24HC8uK0dbAFOXrbJzjiBvshM0ohSRL8XfnWMi+Rk55yA0155dcKbremnXOJ+/5lV+RkxzVUmUyqXU7diwBiGqqOEk6z0Sww7cGJTUaeJDJ9yXiWoIOJZ0S+bV22VZTnAOeZugttkkFYrDY3fp+ITqbHDq57mJe1Hv2O7PLpZ6ZgDxAyLJvjkWoJty/IsTRN0jhGWE2PeTR pedro.garcia.franco@IP.NETCOM-2016-11-28"
+  - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC4m1pCyEwNqxIPrZinGboeCfIsMaKvsxcvsaavGo+sQZtrps9ur8CnyBk8wVVKFHLbijucOPze6sU3kta8W0LturG2LG2N11LkOv6x7L+eHnfJcwTKcCz9CKy4+zuEf2tJz6q3UXgU9/Z+GABP8uTOtoZC/rXJqQjVy33TwshDAMK6pa/V32NxCTco4RPiz3xli0X9NtcnCvcaQ5VpIHu480keINSvutfSdKYlC2zJgedFr2KhXUhBFMxbIsf/Qi70zpd/Lw2UTa/V44aA8hN6eB55Pj4k1RzxTE/H+iG3lnd7wgRvHLbFGepFAPt2HDeheXAGFdtbU31sR/YeSnCN pedro@acer"
 

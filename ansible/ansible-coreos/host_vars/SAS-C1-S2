@@ -1,0 +1,48 @@
+# Hostname (not FQDN)
+hostname: SAS-C1-S2
+
+# ansible_host sets the IP where Ansible will connect
+ansible_host: 192.168.116.55
+
+# Network configuration
+management_ip: 192.168.116.55
+management_interface: vlan_management
+service_ip: 192.168.249.11
+service_interface: vlan_service
+public_ip: 31.25.159.71
+public_interface: eno51
+
+networks:
+  - name: vlans_private
+    interfaces:
+      - eno49
+    vlans:
+      - name: vlan_management
+        id: 2300
+        network:
+          name: management
+          address: 192.168.116.55/24
+          routes:
+            - destination: 192.168.255.0/24
+              gateway: 192.168.116.254
+      - name: vlan_service
+        id: 2302
+        network:
+          name: service
+          address: 192.168.249.11/24
+          routes:
+            - destination: 192.168.115.0/24
+              gateway: 192.168.249.254
+            - destination: 10.70.11.0/24
+              gateway: 192.168.249.251
+  - name: public
+    interfaces:
+      - eno51
+    network:
+      name: public
+      address: 31.25.159.71/27
+      gateway: 31.25.159.65
+      dns:
+        - 8.8.8.8
+        - 8.8.4.4
+

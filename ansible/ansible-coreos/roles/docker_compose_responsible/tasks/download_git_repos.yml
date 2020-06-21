@@ -1,0 +1,27 @@
+- name: Create repo directory schema (if it does not exist)
+  become: true
+  become_user: root
+  file: path={{ repo_directory_schema[item] }} state=directory owner={{ ansible_ssh_user }} group={{ ansible_ssh_group }}
+  with_items: "{{ repo_directory_schema }}"
+
+- name: Clone Docker images git repositories
+  ignore_errors: true
+  git:
+    repo: "http://{{ git_user }}:{{ git_password }}@{{ git_host }}{{ item.repository }}"
+    version: "{{ item.branch | default('master') }}"
+    accept_hostkey: True
+    update: yes
+    dest: "{{ repo_directory_schema['docker_images_directory'] }}/{{ item.directory }}"
+  with_items: "{{ docker_images }}"
+  register: git_images_repo_status
+  when: plaform_type == 'testing'
+
+- name: Clone Docker composes git repositories
+  ignore_errors: true
+  git:
+    repo: "http://{{ git_user }}:{{ git_password }}@{{ git_host }}{{ item.repository }}"
+    version: "{{ item.branch | default('master') }}"
+    accept_hostkey: True
+    update: yes
+    dest: "{{ repo_directory_schema['docker_composes_directory'] }}/{{ item.directory }}"
+  with_items: "{{ docker_composes }}"

@@ -1,0 +1,8 @@
+# Done using a script due to the lack of Python
+
+# Create coreos_pkg_home directory if it does not exist
+- name: Create {{ coreos_pkg_home }} directory
+  script: create_sas_directory.sh {{ coreos_pkg_home }} {{ ansible_ssh_user }} {{ ansible_ssh_group }}
+  args:
+    creates: "{{ coreos_pkg_home }}"
+

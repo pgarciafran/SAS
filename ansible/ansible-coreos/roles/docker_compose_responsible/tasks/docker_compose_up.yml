@@ -1,0 +1,29 @@
+#- name: Docker Compose down
+#  shell: "{{ docker_compose_bin }} down"
+#  args:
+#    chdir: "{{ docker_compose_config_path }}"
+#  ignore_errors: yes
+
+#- name: Docker Compose down to the remaining composes (when an image has been updated)
+#  shell: "{{ item.compose_args | join(' ') }} {{ docker_compose_bin }} -H tcp://{{ service_ip }}:2375 down"
+#  ignore_errors: yes
+#  args:
+#    chdir: "{{ repo_local_directory }}/docker/bundles/{{ item.directory }}"
+#  with_items: "{{ docker_composes_repositories | sort(reverse=True) }}"
+#  when: item.directory != "registry" and item.directory != "databases" and git_images_repo_status.changed
+
+#- name: Docker Compose up to the remaining composes
+#  shell: "{{ item.compose_args | join(' ') }} {{ docker_compose_bin }} -H tcp://{{ service_ip }}:2375 up -d"
+#  args:
+#    chdir: "{{ repo_local_directory }}/docker/bundles/{{ item.directory }}"
+#  with_items: "{{ docker_composes_repositories }}"
+#  when: item.directory != "registry" and item.directory != "databases"
+
+- name: Docker Compose scale
+  shell: "{{ item.0.compose_args | join(' ') }} {{ docker_compose_bin }} -H tcp://{{ service_ip }}:2375 scale {{ item.1 }}"
+  args:
+    chdir: "{{ repo_local_directory }}/docker/bundles/{{ item.0.directory }}"
+  with_subelements:
+    - "{{ docker_composes_repositories }}"
+    - scale
+

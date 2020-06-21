@@ -1,0 +1,4 @@
+- name: "Creating data directories if needed"
+  file: path={{ item }} state=directory mode="ugo=rwx"
+  with_items: "{{ data_directories + platform_specific_data_directories }}"
+

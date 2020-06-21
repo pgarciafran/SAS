@@ -1,0 +1,39 @@
+- name: "Run/update platform composes as defined"
+  environment: "{{ item.compose_args }}"
+  ignore_errors: true
+  docker_service:
+    docker_host: "tcp://{{ service_ip }}:2375"
+    project_name: "{{ item.compose_project | default(omit) }}"
+    project_src: "{{ repo_directory_schema['docker_composes_directory'] }}/{{ item.directory }}"
+    scale: "{{ item.scale }}"
+  with_items: "{{ docker_composes }}"
+  when: "{{ item.exclude_from_automatic_updates | default(false) }} == false"
+  tags:
+    - compose
+  register: platform_status
+
+- name: "Update platform composes (workaround for those problematic - i.e. use external ports) - 1st step - Down"
+  environment: "{{ item.item.compose_args }}"
+  ignore_errors: true
+  docker_service:
+    docker_host: "tcp://{{ service_ip }}:2375"
+    project_name: "{{ item.item.compose_project | default(omit) }}"
+    project_src: "{{ repo_directory_schema['docker_composes_directory'] }}/{{ item.item.directory }}"
+    state: absent
+  with_items: "{{ platform_status.results }}"
+  when: "{{ item.failed | default(false) }}"
+  tags:
+    - compose
+
+- name: "Update platform composes (workaround for those problematic - i.e. use external ports) - 2nd step - Up"
+  environment: "{{ item.item.compose_args }}"
+  ignore_errors: true
+  docker_service:
+    docker_host: "tcp://{{ service_ip }}:2375"
+    project_name: "{{ item.item.compose_project | default(omit) }}"
+    project_src: "{{ repo_directory_schema['docker_composes_directory'] }}/{{ item.item.directory }}"
+    scale: "{{ item.item.scale }}"
+  with_items: "{{ platform_status.results }}"
+  when: "{{ item.failed | default(false) }}"
+  tags:
+    - compose

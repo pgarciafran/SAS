@@ -1,0 +1,16 @@
+#- name: Docker Compose down to the Registry Docker compose (if needed)
+#  shell: "{{ item.compose_args | join(' ') }} {{ docker_compose_bin }} -H tcp://{{ service_ip }}:2375 down"
+#  ignore_errors: yes
+#  args:
+#    chdir: "{{ repo_local_directory }}/docker/bundles/{{ item.directory }}"
+#  with_items: "{{ docker_composes_repositories}}"
+#  when: item.directory == "registry"
+
+# Launch registry Docker compose
+- name: Launch Registry Docker compose
+  shell: "{% for key, value in item.compose_args.iteritems() %}{{ key }}={{ value }} {% endfor %}{{ docker_compose_bin }} -H tcp://{{ service_ip }}:2375 up -d"
+  args:
+    chdir: "{{ repo_directory_schema['docker_composes_directory'] }}/{{ item.directory }}"
+  with_items: "{{ docker_composes }}"
+  when: item.compose_name == "registry"
+

@@ -1,0 +1,120 @@
+#jinja2: trim_blocks: True, lstrip_blocks: True
+#cloud-config
+hostname: {{ hostname }}
+
+coreos:
+  etcd2:
+    name: {{ hostname }}
+    advertise-client-urls: http://{{ service_ip }}:2379
+    initial-advertise-peer-urls: http://{{ service_ip }}:2380
+    listen-client-urls: http://{{ service_ip }}:2379,http://{{ service_ip }}:4001,http://127.0.0.1:2379,http://127.0.0.1:4001
+    listen-peer-urls: http://{{ service_ip }}:2380
+    initial-cluster-token: {{ initial_cluster_token }}
+    initial-cluster: {% for host in groups[initial_cluster_ansible_group] -%}
+                       {{ hostvars[host]['hostname'] }}=http://{{ hostvars[host]['service_ip'] }}:2380
+                       {%- if not loop.last -%}
+                         ,
+                       {%- endif -%}
+                     {%- endfor %}
+
+  units:
+  - name: etcd2.service
+    command: start
+
+  - name: fleet.service
+    command: stop
+
+  - name: systemd-networkd.service
+    command: restart
+
+  - name: settimezone.service
+    command: start
+    content: |
+      [Unit]
+      Description=Set the time zone
+
+      [Service]
+      ExecStart=/usr/bin/timedatectl set-timezone {{ timezone }}
+      RemainAfterExit=yes
+      Type=oneshot
+
+  - name: iptables-restore.service
+    enable: true
+    command: start
+
+  - name: docker.service
+    command: start
+    drop-ins:
+      - name: override.conf
+        content: |
+          [Service]
+          Environment='DOCKER_OPTS=-H {{ service_ip }}:2376 -H unix:///var/run/docker.sock --cluster-advertise {{ service_interface }}:2376 --cluster-store etcd://127.0.0.1:2379 --insecure-registry="{{ docker_insecure_registry_network }}"'
+          [Unit]
+          After=containerd.service docker.socket network.target iptables-restore.service
+
+{% if not coreos_autoupdate %}
+  - name: update-engine.service
+    mask: true
+
+  - name: locksmithd.service
+    mask: true
+
+{% endif %}
+
+{# COMMENTED OUT DUE TO COREOS PROBLEMS WHEN SERVICE IS MASKED #}
+#  update:
+#    reboot-strategy: {{ coreos_reboot_strategy }}
+#    group: {{ coreos_update_group }}
+
+write_files:
+# Network configuration files
+{# TEMPORARY FOCUSED ON ROPA DEPLOYMENTS #}
+{% include 'systemd-networkd.j2' %}
+
+# SSH
+  - path: /etc/ssh/sshd_config
+    permissions: 0600
+    owner: root:root
+    content: |
+      ListenAddress {{ management_ip }}
+
+      UsePrivilegeSeparation sandbox
+      Subsystem sftp internal-sftp
+      ClientAliveInterval 180
+      UseDNS no
+
+      PermitRootLogin no
+      AllowUsers core
+      PasswordAuthentication no
+      ChallengeResponseAuthentication no
+
+# IPTABLES
+  - path: /var/lib/iptables/rules-save
+    permissions: 0644
+    owner: root:root
+    content: |
+      *filter
+      :INPUT ACCEPT [0:0]
+      :FORWARD ACCEPT [0:0]
+      :OUTPUT ACCEPT [0:0]
+      -A INPUT -i {{ public_interface }} -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+      -A INPUT -i {{ public_interface }} -p tcp -m tcp --dport 80 -j ACCEPT
+      -A INPUT -i {{ public_interface }} -p tcp -m tcp --dport 443 -j ACCEPT
+      -A INPUT -i {{ public_interface }} -p icmp -m icmp --icmp-type 0 -j ACCEPT
+      -A INPUT -i {{ public_interface }} -p icmp -m icmp --icmp-type 3 -j ACCEPT
+      -A INPUT -i {{ public_interface }} -p icmp -m icmp --icmp-type 8 -j ACCEPT
+      -A INPUT -i {{ public_interface }} -p icmp -m icmp --icmp-type 11 -j ACCEPT
+      -A INPUT -i {{ public_interface }} -j DROP
+      COMMIT
+
+# UPDATE ENGINE - MANUAL CONFIGURATION
+  - path: /etc/coreos/update.conf
+    permissions: 0644
+    owner: root:root
+    content: |
+      GROUP={{ coreos_update_group }}
+      REBOOT_STRATEGY={{ coreos_reboot_strategy }}
+
+ssh_authorized_keys:
+{{ ssh_authorized_keys | to_nice_yaml}}
+

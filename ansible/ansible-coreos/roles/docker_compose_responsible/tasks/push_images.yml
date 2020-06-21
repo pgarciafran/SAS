@@ -1,0 +1,6 @@
+- name: Push images to registry
+  docker_image:
+    name: "{{ registry_adress }}/{{ item.image_name }}:{{ item.image_tag }}"
+    push: yes
+  with_items: "{{ docker_images }}"
+

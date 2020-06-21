@@ -1,0 +1,18 @@
+#jinja2: trim_blocks: True, lstrip_blocks: True
+
+{% for compose in docker_composes %}
+### {{ compose.compose_name }}
+
+# up
+{% for key, value in compose.compose_args.items() %}{{key}}="{{value}}" {% endfor %}{{ docker_compose_bin }} -H tcp://{{ service_ip }}:2375 {{ "-p %s " % compose.compose_project if compose.compose_project is defined else "" }}-f {{ repo_directory_schema['docker_composes_directory'] }}/{{ compose.directory }}/docker-compose.yml up -d
+
+# scale
+{% for key, value in compose.compose_args.items() %}{{key}}="{{value}}" {% endfor %}{{ docker_compose_bin }} -H tcp://{{ service_ip }}:2375 {{ "-p %s " % compose.compose_project if compose.compose_project is defined else "" }}-f {{ repo_directory_schema['docker_composes_directory'] }}/{{ compose.directory }}/docker-compose.yml scale {% for key, value in compose.scale.items() %}{{key}}={{value}}{% if not loop.last %} {% endif %}{% endfor %}
+
+
+# down
+{% for key, value in compose.compose_args.items() %}{{key}}="{{value}}" {% endfor %}{{ docker_compose_bin }} -H tcp://{{ service_ip }}:2375 {{ "-p %s " % compose.compose_project if compose.compose_project is defined else "" }}-f {{ repo_directory_schema['docker_composes_directory'] }}/{{ compose.directory }}/docker-compose.yml down
+
+
+{% endfor %}
+

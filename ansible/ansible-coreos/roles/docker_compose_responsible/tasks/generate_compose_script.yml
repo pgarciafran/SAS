@@ -1,0 +1,4 @@
+- name: Generate Docker compose script
+  local_action: template src=compose-commands.j2 dest=/tmp/compose-commands-{{ initial_cluster_ansible_group }}
+  tags:
+    - generate-compose

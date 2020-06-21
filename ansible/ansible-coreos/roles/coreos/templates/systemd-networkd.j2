@@ -1,0 +1,78 @@
+{% for network in networks %}
+  {% if (network.name is defined) and (network.interfaces is defined) %}
+  -  path: /etc/systemd/network/{{ network.name }}.network
+     permissions: 0644
+     owner: root
+     content: |
+       [Match]
+       Name={% for interface in network.interfaces -%}
+              {{ interface }} 
+            {% endfor %}
+
+       [Network]
+    {% if (network.vlans is defined) %}
+      {% for vlan in network.vlans %}
+       VLAN={{ vlan.name }}
+      {% endfor %}
+       BindCarrier={% for interface in network.interfaces -%}
+                     {{ interface }} 
+                   {% endfor %}
+
+      {% for vlan in network.vlans %}
+  -  path: /etc/systemd/network/{{ vlan.name }}.netdev
+     permissions: 0644
+     owner: root
+     content: |
+       [NetDev]
+       Name={{ vlan.name }}
+       Kind=vlan
+ 
+       [VLAN]
+       Id={{ vlan.id }}
+
+        {%  if (vlan.network is defined) %}
+  -  path: /etc/systemd/network/{{ vlan.network.name }}.network
+     permissions: 0644
+     owner: root
+     content: |
+       [Match]
+       Name={{ vlan.name }}
+
+          {%  if (vlan.network.address is defined) %}
+       [Network]
+       Address={{ vlan.network.address }}
+          {% endif %} 
+          {%  if (vlan.network.routes is defined) %}
+            {% for route in vlan.network.routes %}
+       [Route]
+       Destination={{ route.destination }}
+       Gateway={{ route.gateway }}
+            {% endfor %}
+          {% endif %} 
+        {% endif %} 
+      {% endfor %}
+    {% endif %}
+    {%  if (network.network is defined) %}
+      {%  if (network.network.address is defined) %}
+       Address={{ network.network.address }}
+      {% endif %}
+      {%  if (network.network.dns is defined) %}
+        {% for nameserver in network.network.dns %}
+       DNS={{ nameserver }}
+        {% endfor %}
+      {% endif %}
+      {%  if (network.network.gateway is defined) %}
+       Gateway={{ network.network.gateway }}
+      {% endif %}
+      {%  if (network.network.routes is defined) %}
+        {% for route in network.network.routes %}
+       [Route]
+       Destination={{ route.destination }}
+       Gateway={{ route.gateway }}
+        {% endfor %}
+      {% endif %} 
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+

@@ -1,0 +1,56 @@
+#- name: Build Docker images
+#  docker_image:
+#    path: "{{ repo_local_directory }}/docker/images/{{ item.directory }}"
+#    name: "{{ item.image_name }}"
+#    tag: "{{ item.image_tag }}"
+#    buildargs: "{{ item.build_args | default(omit) }}"
+#  with_items: "{{ docker_images_repositories }}"
+
+#- name: Untag and remove changed and present images
+#  docker_image:
+#    name: "{{ item.item.image_name }}:{{ item.item.image_tag }}"
+#    repository: "{{ registry_adress }}/{{ item.item.image_name }}"
+#    tag: "{{ item.item.image_tag }}"
+#    state: absent
+#    force: true
+#  with_items: "{{ git_images_repo_status.results }}"
+#  when: item.changed
+
+#- name: Untag and remove changed and present images
+#  docker_image:
+#    name: "{{ registry_adress }}/{{ item.item.image_name }}:{{ item.item.image_tag }}"
+#    state: absent
+#    force: true
+#  with_items: "{{ git_images_repo_status.results }}"
+#  when: item.changed
+
+#- name: Build Docker images
+#  docker_image:
+#    path: "{{ repo_local_directory }}/docker/images/{{ item.item.directory }}"
+#    name: "{{ item.item.image_name }}"
+#    tag: "{{ item.item.image_tag }}"
+#    buildargs: "{{ item.item.build_args | default(omit) }}"
+#  with_items: "{{ git_images_repo_status.results }}"
+#  when: item.changed
+
+- name: Build Docker images
+  docker_image:
+    state: present
+    name: "{{ registry_adress }}/{{ item.item.image_name }}"
+    tag: "{{ item.item.image_tag }}"
+    path: "{{ repo_directory_schema['docker_images_directory'] }}/{{ item.item.directory }}"
+    buildargs: "{{ item.item.build_args | default(omit) }}"
+#    nocache: true
+  with_items: "{{ git_images_repo_status.results }}"
+
+#- name: Build Docker images
+#  docker_image:
+#    path: "{{ repo_directory_schema['docker_images_directory'] }}/{{ item.item.directory }}"
+#    name: "{{ registry_adress }}/{{ item.item.image_name }}"
+#    tag: "{{ item.item.image_tag }}"
+#    force: true
+#    nocache: true
+#    buildargs: "{{ item.item.build_args | default(omit) }}"
+#  with_items: "{{ git_images_repo_status.results }}"
+#  when: item.changed
+

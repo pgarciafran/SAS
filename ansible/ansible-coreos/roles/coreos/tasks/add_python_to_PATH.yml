@@ -1,0 +1,4 @@
+- name: Copy script that updates PATH environment variable
+  template: src=add_python_to_PATH.sh.j2 dest=/etc/profile.d/add_python_to_PATH.sh owner=root group=root mode=0644
+  become: true
+  become_user: root

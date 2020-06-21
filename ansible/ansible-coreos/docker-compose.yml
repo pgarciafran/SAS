@@ -1,0 +1,11 @@
+# Docker compose responsible (which will be the first Swarm manager):
+#   - Clone or update Docker images and composes git repositories
+#   - Launch private Docker registry
+#   - Push images to Docker registry
+#   - Launch the remaining Docker composes (Relaunching when an image gets updated) [TO BE DONE]
+- name: Run Swarm Docker composes (from first manager)
+  hosts: swarm-manager-leaders
+  roles:
+    - docker_compose_responsible
+
+

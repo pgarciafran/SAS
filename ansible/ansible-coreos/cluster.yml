@@ -1,0 +1,48 @@
+# Bootstrap Ansible for CoreOS:
+#   - Create /opt/sas directory
+#   - Install PyPy (portable Python implementation), pip and dependencies
+- name: Ansible bootstraping in CoreOS servers
+  hosts: coreos
+  gather_facts: False
+  roles:
+    - coreos_prebootstrap
+    - ansible-coreos-bootstrap
+
+# CoreOS configuration:
+#   - Add /opt/sas/bin to PATH environment variable
+#   - Generate cloud-config
+- name: CoreOS configuration
+  hosts: coreos
+  roles:
+    - coreos
+
+# Docker Swarm bootstrap (1.11)
+
+# All Swarm nodes:
+#   - Run swarm-agent container
+#- name: Swarm cluster initialization
+#  hosts: coreos
+#  serial: 1
+#  roles:
+#    - swarm_node_1_11
+
+# Swarm managers:
+#   - Run swarm-manager container
+#   - Install Docker-compose with pip
+#- name: Swarm managers setup
+#  hosts: swarm-managers
+#  serial: 1
+#  roles:
+#    - swarm_manager_1_11
+
+
+
+# Middleware or internal nodes:
+#   - Create directories for Docker containers persistence (under /data)
+- name: Middleware or internal nodes (subgroup of CoreOS servers, inside Docker Swarm cluster)
+  hosts: coreos-middlewares
+  become: yes
+  become_user: root
+  roles:
+    - middleware_internal
+

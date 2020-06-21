@@ -1,0 +1,9 @@
+# coreos_prebootstrap and ansible-coreos-bootstrap specific variables
+coreos_pkg_home: "/opt/sas/python"
+
+# Ansible specific group variables
+ansible_ssh_user: core
+ansible_ssh_group: core # Not really an Ansible variable, it just helps to give the right credentials when chown or similar are used
+ansible_python_interpreter: "/opt/sas/python/bin/python"
+ansible_become_method: sudo
+

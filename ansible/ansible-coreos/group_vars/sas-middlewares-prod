@@ -1,0 +1,13 @@
+# cloud-config variables:
+initial_cluster_token: sas
+initial_cluster_ansible_group: sas-middlewares-prod
+docker_insecure_registry_network: 192.168.1.0/24
+
+coreos_autoupdate: false
+coreos_reboot_strategy: "off"
+coreos_update_group: stable
+
+platform_specific_data_directories:
+  - /data/reports/sas
+
+plaform_type: production

@@ -1,5 +1,5 @@
 # Group that includes every SecAndSys server
-[ropa:children]
+[sas:children]
 sas-middlewares
 
 # Group that includes every CoreOS server. We assume every server of this group will be part of an unique Swarm cluster too.
@@ -26,11 +26,11 @@ sas-middlewares
 sas-middlewares-prod
 
 # Production platform Ropa middlewares (subgroup of [ropa-middlewares])
-[ropa-middlewares-prod:children]
+[sas-middlewares-prod:children]
 sas-middlewares-prod-swarm-managers
 
 # Production platform Ropa middlewares (subgroup of [ropa-middlewares-prod])
-[ropa-middlewares-prod-swarm-managers]
+[sas-middlewares-prod-swarm-managers]
 SAS-C1-S1
 SAS-C1-S2
 SAS-C1-S3

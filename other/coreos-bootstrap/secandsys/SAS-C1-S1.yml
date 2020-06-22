@@ -56,7 +56,7 @@ write_files:
        Name=vlan_management
 
        [Network]
-       Address=192.168.1.100/24
+       Address=192.168.1.145/24
        Gateway=192.168.1.1
        DNS=8.8.8.8
 

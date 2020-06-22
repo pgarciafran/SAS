@@ -2,14 +2,14 @@
 hostname: SAS-C1-S1
 
 # ansible_host sets the IP where Ansible will connect
-ansible_host: 192.168.1.54
+ansible_host: 192.168.1.145
 
 # Network configuration
-management_ip: 192.168.116.54
+management_ip: 192.168.1.145
 management_interface: vlan_management
 service_ip: 192.168.249.10
 service_interface: vlan_service
-public_ip: 31.25.159.70
+public_ip: 31.25.159.74
 public_interface: eno51
 
 networks:

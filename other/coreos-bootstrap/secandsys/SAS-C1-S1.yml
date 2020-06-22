@@ -3,38 +3,38 @@ hostname: SAS-C1-S1
 
 write_files:
 # Bond
-#  -  path: /etc/systemd/network/private.netdev
-#     permissions: 0644
-#     owner: root
-#     content: |
-#       [NetDev]
-#       Name=bond_private
-#       Kind=bond
+  -  path: /etc/systemd/network/private.netdev
+     permissions: 0644
+     owner: root
+     content: |
+       [NetDev]
+       Name=bond_private
+       Kind=bond
  
-#       [Bond]
-#       Mode=balance-rr
+       [Bond]
+       Mode=balance-rr
 
-#  -  path: /etc/systemd/network/bond_private.network
-#     permissions: 0644
-#     owner: root
-#     content: |
-#       [Match]
-#       Name=eno49 eno50
+  -  path: /etc/systemd/network/bond_private.network
+     permissions: 0644
+     owner: root
+     content: |
+       [Match]
+       Name=eno49 eno50
 
-#       [Network]
-#       Bond=bond_private
+       [Network]
+       Bond=bond_private
 
 # VLAN
-#  -  path: /etc/systemd/network/vlans_private.network
-#     permissions: 0644
-#     owner: root
-#     content: |
-#       [Match]
-#       Name=bond_private
+  -  path: /etc/systemd/network/vlans_private.network
+     permissions: 0644
+     owner: root
+     content: |
+       [Match]
+       Name=bond_private
  
-#       [Network]
-#       VLAN=vlan_management
-#       BindCarrier=eno49 eno50
+       [Network]
+       VLAN=vlan_management
+       BindCarrier=eno49 eno50
 
   -  path: /etc/systemd/network/management.netdev
      permissions: 0644

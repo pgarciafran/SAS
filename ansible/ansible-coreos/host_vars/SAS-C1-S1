@@ -9,7 +9,7 @@ management_ip: 192.168.1.145
 management_interface: vlan_management
 service_ip: 192.168.249.10
 service_interface: vlan_service
-public_ip: 31.25.159.74
+public_ip: 170.253.11.170 
 public_interface: eno51
 
 networks:
@@ -21,10 +21,10 @@ networks:
         id: 2300
         network:
           name: management
-          address: 192.168.116.54/24
+          address: 192.168.1.145/24
           routes:
             - destination: 192.168.255.0/24
-              gateway: 192.168.116.254
+              gateway: 192.168.1.1
       - name: vlan_service
         id: 2302
         network:
@@ -40,8 +40,8 @@ networks:
       - eno51
     network:
       name: public
-      address: 31.25.159.70/27
-      gateway: 31.25.159.65
+      address:  170.253.11.170 /27
+      gateway:  170.253.11.170 
       dns:
         - 8.8.8.8
         - 8.8.4.4

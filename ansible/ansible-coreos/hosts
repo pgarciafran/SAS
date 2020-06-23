@@ -32,8 +32,8 @@ sas-middlewares-prod-swarm-managers
 # Production platform Ropa middlewares (subgroup of [ropa-middlewares-prod])
 [sas-middlewares-prod-swarm-managers]
 SAS-C1-S1
-#SAS-C1-S2
-#SAS-C1-S3
+SAS-C1-S2
+SAS-C1-S3
 
 # Group that includes those Swarm managers which assume the role of being leaders (they download and build the Docker images) (subgroup of [swarm-managers])
 [swarm-manager-leaders]

@@ -1,0 +1,22 @@
+#cloud-config
+hostname: SAS-C1-S1
+
+coreos:
+  units:
+    - name: 00-eth0.network
+      runtime: true
+      content: |
+          [Match]
+          Name=enp2s0
+
+          [Network]
+          Address=192.168.1.145/24
+          Gateway=192.168.1.1
+          DNS=8.8.8.8
+
+
+    - name: systemd-networkd.service
+      command: restart
+
+ssh_authorized_keys:
+ - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDTOhpiKN4dNSeCyGFMLNyd5x64JM4Z9ilNds5wrIjFuwidlcxEoAdWpKQP49OI4ZGRX5auW8c7fqCVOGzMxcU5oQWGxaVZIlqX3T0rnOYGch6hiK2SUVecBV0AczjC0cIi4E/n00qKzqjQuP/VSFKA9dxxEY435nD+lPJCzPmEbcJSLf5+8U+cHHWyQkQy0KCL/S1qO5ooQEGqv3UGqk4u9UqhXEPg/SYRDYgE+sUstFo5l//m4E3i9JXrSfd+F/D/DqF924omLvNs9KToeEkEXgW+EZcTyJq1I6SR1IA9bVcodIYDjtiGK1BpBQRxKuHRCybrw7aWJt5QMa1BkZMn pedro@asus"

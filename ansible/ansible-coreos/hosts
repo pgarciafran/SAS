@@ -1,19 +1,21 @@
-# Group that includes every SecAndSys server
-[sas:children]
-sas-middlewares-prod
-#sas-middlewares-ref
-
-# Group that includes every CoreOS server. We assume every server of this group will be part of an unique Swarm cluster too.
-[coreos:children]
-#swarm-managers
-coreos-middlewares-prod
-#coreos-middlewares-ref
-
-# Group that includes those Swarm nodes where middleware or internal Docker containers run (subgroup of [coreos])
-[coreos-middlewares-prod:children]
+# Group that includes those Swarm nodes included in production platform running CoreOS (subgroup of [coreos])
+[coreos-prod]
 SAS-C1-S1
 SAS-C1-S2
 SAS-C1-S3
+
+# Group of CoreOs servers for REF platform (subgroup of [coreos])
+[coreos-ref]
+
+# Group that includes every SecAndSys middleware servers 
+[sas:children]
+sas-middlewares-prod
+sas-middlewares-ref
+
+# Group that includes every CoreOS server.
+[coreos:children]
+coreos-prod
+coreos-ref
 
 # Group that includes those Swarm managers which assume the role of being leaders (download and build Docker images)
 #[swarm-manager-leaders]

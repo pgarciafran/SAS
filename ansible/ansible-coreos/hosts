@@ -1,22 +1,49 @@
-# Group that includes those Swarm nodes included in production platform running CoreOS (subgroup of [coreos])
-[coreos-prod]
+# Group that includes every SecAndSys server
+[sas:children]
+sas-middlewares
+
+# Group that includes every CoreOS server. Assuming that every server of this group will be part of an unique Swarm cluster.
+[coreos:children]
+swarm-managers
+swarm-workers
+coreos-middlewares
+
+# Group that includes all the Swarm managers (subgroup of [coreos])
+[swarm-managers:children]
+swarm-manager-leaders
+sas-middlewares-prod-swarm-managers
+
+# Group that includes all the Swarm workers (subgroup of [coreos])
+#[swarm-workers]
+# Empty
+
+# Group that includes those Swarm nodes where middleware or internal Docker containers run (subgroup of [coreos])
+[coreos-middlewares:children]
+sas-middlewares
+
+# Group that includes all the SecAndSys middlewares (subgroup of [middlewares] and [sas])
+[sas-middlewares:children]
+sas-middlewares-prod
+sas-middlewares-ref
+
+# Production platform SecandSys middlewares (subgroup of [sas-middlewares])
+[sas-middlewares-prod:children]
+sas-middlewares-prod-swarm-managers
+
+# Reference platform SecandSys middlewares (subgroup of [sas-middlewares])
+[sas-middlewares-ref:children]
+sas-middlewares-ref-swarm-managers
+
+# Reference platform SecandSys middlewares (subgroup of [sas-middlewares-prod])
+[sas-middlewares-ref-swarm-managers]
+#Empty
+
+# Production platform SecAndSys middlewares (subgroup of [sas-middlewares-prod])
+[sas-middlewares-prod-swarm-managers]
 SAS-C1-S1
 SAS-C1-S2
 SAS-C1-S3
 
-# Group of CoreOs servers for REF platform (subgroup of [coreos])
-[coreos-ref]
-
-# Group that includes every SecAndSys middleware servers 
-[sas:children]
-sas-middlewares-prod
-sas-middlewares-ref
-
-# Group that includes every CoreOS server.
-[coreos:children]
-coreos-prod
-coreos-ref
-
-# Group that includes those Swarm managers which assume the role of being leaders (download and build Docker images)
-#[swarm-manager-leaders]
-#SAS-C1-S1
+# Group that includes those Swarm managers which assume the role of being leaders (download and build Docker images) (subgroup of [swarm-managers])
+[swarm-manager-leaders]
+SAS-C1-S1

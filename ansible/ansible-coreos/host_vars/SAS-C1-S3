@@ -7,10 +7,10 @@ ansible_host: 192.168.1.147
 # Network configuration
 management_ip: 192.168.1.147
 management_interface: vlan_management
-service_ip: 192.168.249.12
-service_interface: vlan_service
-public_ip: 170.253.11.170 
-public_interface: eno51
+#service_ip: 192.168.249.12
+#service_interface: vlan_service
+#public_ip: 170.253.11.170 
+#public_interface: eno51
 
 networks:
   - name: vlans_private

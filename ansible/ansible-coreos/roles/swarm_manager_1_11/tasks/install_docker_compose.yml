@@ -1,0 +1,3 @@
+- name: Install docker-compose {{ docker_compose_version }} with previous installed PIP
+  pip: name=docker-compose version={{ docker_compose_version }}
+

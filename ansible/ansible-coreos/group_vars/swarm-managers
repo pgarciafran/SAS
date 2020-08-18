@@ -1,0 +1,13 @@
+docker_compose_bin: "/opt/apptv/python/pypy/bin/docker-compose"
+docker_compose_version: 1.26.2
+
+git_user: secandsys
+git_password: .m4r10n3t4s
+git_host: git.secandsys.com
+
+repo_directory_schema:
+  root_directory: "/opt/sas/repo"
+  docker_directory: "/opt/sas/repo/docker"
+  docker_images_directory: "/opt/sas/repo/docker/images"
+  docker_composes_directory: "/opt/sas/repo/docker/composes"
+

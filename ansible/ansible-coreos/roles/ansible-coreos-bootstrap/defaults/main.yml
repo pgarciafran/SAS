@@ -3,9 +3,9 @@
 coreos_ssl_certs: "/etc/ssl/certs"
 coreos_pkg_home: "/home/core"
 
-coreos_pypy_url: "https://bitbucket.org/squeaky/portable-pypy/downloads"
-coreos_pypy_flavor: "linux_x86_64-portable"
-coreos_pypy_version: "5.7.1"
-coreos_pypy_sha256: "8a6a194963eb58d582413c4bcdef6119f9f9f117a05032d1fb13192d934510c6"
+coreos_pypy_url: "https://github.com/squeaky-pl/portable-pypy/releases/download/pypy-7.2.0"
+coreos_pypy_flavor: ""
+coreos_pypy_version: "7.2.0-linux_x86_64-portable"
+coreos_pypy_sha256: "a4f301e7629aafe4691ed1c3e9a39cf2158d86524f6ce584e5b850303e77ad81"
 
 ansible_facts_dir: "/etc/ansible/facts.d"

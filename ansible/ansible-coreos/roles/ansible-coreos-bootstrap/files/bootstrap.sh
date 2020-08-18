@@ -14,7 +14,7 @@ PYPY_INSTALL="$PKG_HOME/.pypy"
 
 cd /tmp
 
-FILENAME="pypy-$PYPY_VERSION-$PYPY_FLAVOR.tar.bz2"
+FILENAME="pypy-$PYPY_VERSION$PYPY_FLAVOR.tar.bz2"
 curl --retry 5 -L -o "$FILENAME" "$PYPY_DOWNLOAD_URL/$FILENAME"
 
 if [[ -n "$PYPY_SHA256" ]]; then

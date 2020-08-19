@@ -1,7 +1,3 @@
-# Launch swarm-manager container
-#- name: Launch swarm-manager container
-#  include: launch_swarm_manager.yml
-
 # Installs docker compose with pip
 - name: Install Docker Compose with pip
   include: install_docker_compose.yml

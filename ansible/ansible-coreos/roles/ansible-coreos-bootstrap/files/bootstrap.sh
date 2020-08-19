@@ -63,7 +63,7 @@ PIP_VERSION=`$PYPY_HOME/bin/pip --version | awk '{ print $2 }'`
 WHEEL_VERSION=`$PYPY_HOME/bin/wheel version | awk '{ print $2 }'`
 
 # install needed modules
-$PYPY_HOME/bin/pip install docker
+$PYPY_HOME/bin/pip install docker-py
 #$PYPY_HOME/bin/pip install 'docker-compose>=1.7.0'
 
 cat > "$ANSIBLE_FACTS_DIR/bootstrap.fact" <<EOF

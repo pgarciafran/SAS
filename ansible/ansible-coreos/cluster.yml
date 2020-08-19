@@ -7,7 +7,6 @@
   roles:
     - coreos_prebootstrap
     - ansible-coreos-bootstrap
-      #when: nuke
 
 # CoreOS configuration:
 #   - Add /opt/sas/bin to PATH environment variable

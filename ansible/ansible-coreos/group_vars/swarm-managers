@@ -1,5 +1,5 @@
-docker_compose_bin: "/opt/apptv/python/pypy/bin/docker-compose"
-docker_compose_version: 1.26.2
+docker_compose_bin: "/opt/sas/python/pypy/bin/docker-compose"
+docker_compose_version: 1.24.0
 
 git_user: secandsys
 git_password: .m4r10n3t4s

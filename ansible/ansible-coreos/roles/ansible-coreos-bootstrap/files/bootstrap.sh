@@ -14,7 +14,7 @@ PYPY_INSTALL="$PKG_HOME/.pypy"
 
 cd /tmp
 
-FILENAME="pypy-$PYPY_VERSION$PYPY_FLAVOR.tar.bz2"
+FILENAME="pypy$PYPY_VERSION$PYPY_FLAVOR.tar.bz2"
 curl --retry 5 -L -o "$FILENAME" "$PYPY_DOWNLOAD_URL/$FILENAME"
 
 if [[ -n "$PYPY_SHA256" ]]; then
@@ -27,7 +27,7 @@ rm -f "$FILENAME"
 
 $SUDO mkdir -p "$PYPY_INSTALL"
 $SUDO rm -rf "$PYPY_INSTALL"
-$SUDO mv -n "pypy-$PYPY_VERSION$PYPY_FLAVOR" "$PYPY_INSTALL"
+$SUDO mv -n "pypy$PYPY_VERSION$PYPY_FLAVOR" "$PYPY_INSTALL"
 
 # make sure PATH contains the location where pip, wheel and friends are
 # so that ansible knows where to find them

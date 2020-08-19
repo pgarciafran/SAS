@@ -3,7 +3,7 @@
 coreos_ssl_certs: "/etc/ssl/certs"
 coreos_pkg_home: "/home/core"
 
-coreos_pypy_url: "https://github.com/squeaky-pl/portable-pypy/releases/download/pypy-3.6-7.2.0"
+coreos_pypy_url: "https://github.com/squeaky-pl/portable-pypy/releases/download/pypy3.6-7.2.0"
 coreos_pypy_flavor: ""
 coreos_pypy_version: "3.6-7.2.0-linux_x86_64-portable"
 coreos_pypy_sha256: "59099546b4dee56edcde2c9ff706687e35bb2aa94354cd56daa78aca036bd3d8"

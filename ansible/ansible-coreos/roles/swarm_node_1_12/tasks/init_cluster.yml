@@ -1,5 +1,5 @@
 - name: Start primary swarm manager
-  shell: docker swarm init --advertise-addr {{ ansible_host }}
+  shell: docker swarm init --advertise-addr {{ host_addr }}
   become: true
   become_user: root
 

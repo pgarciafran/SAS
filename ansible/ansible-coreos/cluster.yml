@@ -25,24 +25,27 @@
   roles:
     - install_docker_compose
 
-# Docker Swarm bootstrap (from v.1.12 onwards)
-# Swarm managers:
-#   - Cluster init and set manager host as leader
+# Docker Swarm bootstrap (1.12)
 - name: Swarm cluster initialization (at first manager node)
   hosts: swarm-managers[0]
   roles:
-    -  role: swarm_node_1_12 
+    - { role: swarm_node, purpose: init }
 
-# Swarm workers:
-#   - Join swark-workers to the cluster
-- name: Add worker nodes (ONLY WORKERS) to Swarm cluster
+- name: Add the rest of manager nodes to Swarm cluster
+  hosts: swarm-managers[1:]
+  become: yes
+  become_user: root
+  serial: 1
+  roles:
+    - { role: swarm_node, purpose: add_managers, manager_token: "{{ hostvars[groups['coreos-cluster-managers'][0]]['manager_token'] }}", swarm_bind_addr: "{{ hostvars[groups['coreos-cluster-managers'][0]]['host_addr'] }}" }
+
+#- name: Add worker nodes (only workers, not managers) to Swarm cluster
   hosts: swarm-workers
   become: yes
   become_user: root
   serial: 1
   roles:
-    - swarm_node_1_12_workers
-
+    - { role: swarm_node, purpose: add_workers, worker_token: "{{ hostvars[groups['coreos-cluster-managers'][0]]['worker_token'] }}", swarm_bind_addr: "{{ hostvars[groups['coreos-cluster-managers'][0]]['host_addr'] }}" }
 
 # Middleware or internal nodes:
 #   - Create directories for Docker containers persistence (under /data)

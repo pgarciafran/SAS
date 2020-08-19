@@ -15,7 +15,8 @@ sas-middlewares-prod-swarm-managers
 
 # Group that includes all the Swarm workers (subgroup of [coreos])
 [swarm-workers]
-# Empty
+SAS-C1-S2
+SAS-C1-S3
 
 # Group that includes those Swarm nodes where middleware or internal Docker containers run (subgroup of [coreos])
 [coreos-middlewares:children]

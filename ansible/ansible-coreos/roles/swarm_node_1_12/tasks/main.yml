@@ -1,10 +1,8 @@
 - include: init_cluster.yml
-  when: purpose == 'init'
+  #when: purpose == 'init'
 
-- include: add_managers.yml
-  when: purpose == 'add_managers'
+#- include: add_managers.yml
+#  when: purpose == 'add_managers'
 
-- include: add_workers.yml
-  when: purpose == 'add_workers'
 
 

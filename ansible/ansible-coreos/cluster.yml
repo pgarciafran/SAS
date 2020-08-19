@@ -1,5 +1,5 @@
 # Bootstrap Ansible for CoreOS:
-#   - Create /opt/apptv directory
+#   - Create /opt/sas directory
 #   - Install PyPy (portable Python implementation), pip and dependencies
 - name: Ansible bootstraping in CoreOS servers
   hosts: coreos
@@ -9,7 +9,7 @@
     - ansible-coreos-bootstrap
 
 # CoreOS configuration:
-#   - Add /opt/apptv/bin to PATH environment variable
+#   - Add /opt/sas/bin to PATH environment variable
 #   - Generate cloud-config
 - name: CoreOS configuration
   hosts: coreos
@@ -27,21 +27,21 @@
 
 
 
-# Docker Swarm bootstrap (1.12)
-- name: Swarm cluster initialization (at first manager node)
+# Docker Swarm bootstrap (from v.1.12 onwards)
+- name: Swarm cluster initialization (at first manager node) and setup as Leader
   hosts: swarm-managers[0]
   roles:
     - { role: swarm_node_1_12, purpose: init }
 
-#- name: Add the rest of manager nodes to Swarm cluster
-#  hosts: swarm-managers[1:]
-#  become: yes
-#  become_user: root
-#  serial: 1
-#  roles:
-#    - { role: swarm_node_1_12, purpose: add_managers, manager_token: "{{ hostvars[groups['coreos-cluster-managers'][0]]['manager_token'] }}", swarm_bind_addr: "{{ hostvars[groups['coreos-cluster-managers'][0]]['host_addr'] }}" }
+      #- name: Add the rest of manager nodes to Swarm cluster
+      # hosts: swarm-managers[1:]
+      #  become: yes
+      #  become_user: root
+      #  serial: 1
+      #  roles:
+      #   - { role: swarm_node_1_12, purpose: add_managers, manager_token: "{{ hostvars[groups['swarm-managers'][0]]['manager_token'] }}", swarm_bind_addr: "{{ hostvars[groups['swarm-managers'][0]]['management_ip'] }}" }
 
-- name: Add worker nodes (only workers, not managers) to Swarm cluster
+- name: Add worker nodes (ONLY workers) to Swarm cluster
   hosts: swarm-workers
   become: yes
   become_user: root

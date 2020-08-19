@@ -1,0 +1,5 @@
+- name: "Starting secondary Swarm managers"
+  shell: docker swarm join --token {{ manager_token }} {{ swarm_bind_addr }}:2377
+  register: init_result
+
+- debug: var=init_result

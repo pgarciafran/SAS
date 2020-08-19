@@ -14,7 +14,7 @@ swarm-manager-leaders
 sas-middlewares-prod-swarm-managers
 
 # Group that includes all the Swarm workers (subgroup of [coreos])
-#[swarm-workers]
+[swarm-workers]
 # Empty
 
 # Group that includes those Swarm nodes where middleware or internal Docker containers run (subgroup of [coreos])

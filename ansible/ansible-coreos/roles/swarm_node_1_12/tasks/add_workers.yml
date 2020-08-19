@@ -1,0 +1,5 @@
+- name: "Starting Swarm workers"
+  shell: docker swarm join --token {{ worker_token }} {{ swarm_bind_addr }}:2377
+  register: init_result
+
+- debug: var=init_result

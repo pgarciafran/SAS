@@ -16,15 +16,15 @@
   roles:
     - coreos
 
-# Docker Swarm bootstrap (1.11)
+# Docker Swarm bootstrap (from v.1.12 onwards) 
 
 # All Swarm nodes:
 #   - Run swarm-agent container
-- name: Swarm cluster initialization
-  hosts: coreos
-  serial: 1
-  roles:
-    - swarm_node_1_11
+#- name: Swarm cluster configuration
+#  hosts: coreos
+#  serial: 1
+#  roles:
+#    - swarm_node_1_11
 
 # Swarm managers:
 #   - Run swarm-manager container

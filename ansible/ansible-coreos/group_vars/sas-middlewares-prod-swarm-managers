@@ -1,0 +1,18 @@
+registry_adress: "192.168.1.145:5000"
+
+docker_composes:
+  - compose_name: 'shipyard'
+    repository: '/SAS/docker-compose-shipyard.git'
+    branch: 'master'
+    directory: 'shipyard'
+    compose_args:
+      NODE: SAS-C1-S1
+      ETCD_HOST: proxy:80
+      REGISTRY_HOST: 192.168.1.145
+      LOGGING_HOST: "127.0.0.1:20000"
+      SHIPYARD_IMAGE_VERSION: v1-1
+      IPNETCOM_DOMAINNAME: shipyard.secandsys.com
+      SWARM_MANAGER_HOST: 192.168.1.145
+    scale:
+      shipyard-rethinkdb: 1
+      shipyard-controller: 1

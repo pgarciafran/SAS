@@ -14,12 +14,12 @@
     dest: "{{ repo_directory_schema['docker_images_directory'] }}/{{ item.directory }}"
   with_items: "{{ docker_images }}"
   register: git_images_repo_status
-  when: plaform_type == 'testing'
+  when: plaform_type == 'production'
 
 - name: Clone Docker composes git repositories
   ignore_errors: true
   git:
-    repo: "git clone {{ git_host }}{{ item.repository }}"
+    repo: "http://{{ git_user }}:{{ git_password }}@{{ git_host }}{{ item.repository }}"
     version: "{{ item.branch | default('master') }}"
     accept_hostkey: True
     update: yes

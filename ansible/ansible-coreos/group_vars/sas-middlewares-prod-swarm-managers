@@ -2,7 +2,7 @@ registry_adress: "192.168.1.145:5000"
 
 docker_composes:
   - compose_name: 'shipyard'
-    repository: '/docker-compose-shipyard.git'
+    repository: '/secandsys/docker-compose-shipyard.git'
     branch: 'master'
     directory: 'shipyard'
     compose_args:

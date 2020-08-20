@@ -19,7 +19,7 @@
 - name: Clone Docker composes git repositories
   ignore_errors: true
   git:
-    repo: "http://{{ git_user }}:{{ git_password }}@{{ git_host }}{{ item.repository }}"
+    repo: "git clone {{ git_host }}{{ item.repository }}"
     version: "{{ item.branch | default('master') }}"
     accept_hostkey: True
     update: yes

@@ -2,8 +2,8 @@ docker_compose_bin: "/opt/sas/python/pypy/bin/docker-compose"
 docker_compose_version: 1.9.0
 swarm_bind_addr: 192.168.1.145
 
-git_user: secandsys
-git_password: .m4r10n3t4s
+git_user: git 
+git_password:
 git_host: git.secandsys.com
 
 repo_directory_schema:

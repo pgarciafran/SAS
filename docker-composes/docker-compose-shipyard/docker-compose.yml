@@ -1,0 +1,39 @@
+version: '2'
+services:
+  shipyard-rethinkdb:
+    image: ${REGISTRY_HOST}:5000/rethinkdb:latest
+    volumes:
+      - /data/rethinkdb:/data
+    restart: always
+    environment:
+      - "constraint:node==${NODE}"
+    networks:
+      - shipyard_internal
+    logging:
+      driver: gelf
+      options:
+        gelf-address: "udp://${LOGGING_HOST}"
+  shipyard-controller:
+    image: ${REGISTRY_HOST}:5000/shipyard:${SHIPYARD_IMAGE_VERSION}
+    links:
+      - shipyard-rethinkdb:rethinkdb
+    environment:
+      - "constraint:node==${NODE}"
+      - "ETCD_HOST=${ETCD_HOST}"
+      - "IPNETCOM_DOMAINNAME=${IPNETCOM_DOMAINNAME}"
+      - 'PROXY_MW_NETWORK_NAME=proxies_middleware'
+      - "SWARM_MANAGER_HOST=${SWARM_MANAGER_HOST}"
+    networks:
+      - proxies_middleware
+      - shipyard_internal
+    restart: always
+    logging:
+      driver: gelf
+      options:
+        gelf-address: "udp://${LOGGING_HOST}"
+
+networks:
+  proxies_middleware:
+    external: true
+  shipyard_internal:
+    driver: overlay

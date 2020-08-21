@@ -1,0 +1,10 @@
+/docker-image-backup
+/docker-image-percona-official
+/docker-image-graylog
+/docker-image-proxy
+/docker-image-shipyard
+/docker-image-tcs
+/docker-image-zabbix-agent
+/docker-image-zabbix-server-xxl
+/docker-image-zabbix-server-docker-module
+

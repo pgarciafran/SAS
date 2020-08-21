@@ -5,12 +5,12 @@
 # Launch private Docker registry
 - name: Launch private Docker registry
   include: registry.yml
-  when: plaform_type == 'testing'
+  when: plaform_type == 'production'
 
 # Build Docker images
-#- name: Build Docker images
-#  include: build_images.yml
-#  when: plaform_type == 'testing'
+- name: Build Docker images
+  include: build_images.yml
+  when: plaform_type == 'production'
 
 # Push images to Docker registry
 #- name: Push images to Docker registry

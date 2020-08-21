@@ -33,15 +33,15 @@
 #  with_items: "{{ git_images_repo_status.results }}"
 #  when: item.changed
 
-- name: Build an image and push it to a private repo
+- name: Build Docker images
   docker_image:
-    build:
-      path: "/opt/sas/repo/images/backup"
-    name: "{{ registry_adress }}/backup"
-    tag: v1
-    push: yes
-    source: build
-
+    state: present
+    name: "{{ registry_adress }}/{{ item.item.image_name }}"
+    tag: "{{ item.item.image_tag }}"
+    path: "{{ repo_directory_schema['docker_images_directory'] }}/{{ item.item.directory }}"
+    buildargs: "{{ item.item.build_args | default(omit) }}"
+#    nocache: true
+  with_items: "{{ git_images_repo_status.results }}"
 
 #- name: Build Docker images
 #  docker_image:
@@ -52,4 +52,5 @@
 #    nocache: true
 #    buildargs: "{{ item.item.build_args | default(omit) }}"
 #  with_items: "{{ git_images_repo_status.results }}"
-#  when: item.change
+#  when: item.changed
+

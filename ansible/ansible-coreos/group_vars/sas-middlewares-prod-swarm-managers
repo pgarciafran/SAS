@@ -8,7 +8,7 @@ docker_images:
     directory: 'proxy'
     image_name: 'proxy'
     image_tag: 'v1-4'
-    build_args:
+    build.args:
       PLATFORM: 'secandsys.com'
 
   - repository: '/secandsys/docker-image-shipyard.git'
@@ -29,8 +29,6 @@ docker_composes:
       REGISTRY_HOST: 192.168.1.145
       #LOGGING_HOST: "127.0.0.1:20000"
       NODE: SAS-C1-S1
-    scale:
-      proxy: 2
  
   - compose_name: 'shipyard'
     repository: '/secandsys/docker-compose-shipyard.git'
@@ -38,7 +36,6 @@ docker_composes:
     directory: 'shipyard'
     compose_args:
       NODE: SAS-C1-S1
-      ETCD_HOST: proxy:80
       REGISTRY_HOST: 192.168.1.145
       LOGGING_HOST: "127.0.0.1:20000"
       SHIPYARD_IMAGE_VERSION: v1-1
@@ -56,5 +53,3 @@ docker_composes:
       SERVICE_ADDRESS: 192.168.1.145
       NODE: SAS-C1-S1
       #LOGGING_HOST: "127.0.0.1:20000"
-    scale:
-     registry: 1

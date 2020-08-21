@@ -4,7 +4,7 @@
   file: path={{ repo_directory_schema[item] }} state=directory owner={{ ansible_ssh_user }} group={{ ansible_ssh_group }}
   with_items: "{{ repo_directory_schema }}"
 
-- name: Clone Docker images from git repositories
+- name: Clone Docker images git repositories
   ignore_errors: true
   git:
     repo: "http://{{ git_user }}:{{ git_password }}@{{ git_host }}{{ item.repository }}"
@@ -16,7 +16,7 @@
   register: git_images_repo_status
   when: plaform_type == 'production'
 
-- name: Clone Docker composes from git repositories
+- name: Clone Docker composes git repositories
   ignore_errors: true
   git:
     repo: "http://{{ git_user }}:{{ git_password }}@{{ git_host }}{{ item.repository }}"
@@ -24,4 +24,4 @@
     accept_hostkey: True
     update: yes
     dest: "{{ repo_directory_schema['docker_composes_directory'] }}/{{ item.directory }}"
-   with_items: "{{ docker_composes }}"
+  with_items: "{{ docker_composes }}"

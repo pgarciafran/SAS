@@ -3,28 +3,28 @@
   include: download_git_repos.yml
 
 # Launch private Docker registry
-- name: Launch private Docker registry
-  include: registry.yml
-  when: plaform_type == 'testing'
+#- name: Launch private Docker registry
+#  include: registry.yml
+#  when: plaform_type == 'testing'
 
 # Build Docker images
-- name: Build Docker images
-  include: build_images.yml
-  when: plaform_type == 'testing'
+#- name: Build Docker images
+#  include: build_images.yml
+#  when: plaform_type == 'testing'
 
 # Push images to Docker registry
-- name: Push images to Docker registry
-  include: push_images.yml
-  when: plaform_type == 'testing'
+#- name: Push images to Docker registry
+#  include: push_images.yml
+#  when: plaform_type == 'testing'
 
 # Launch the remaining Docker composes
-- name: Run or update Docker composes
-  include: launch_composes.yml
-  when: plaform_type == 'testing'
+#- name: Run or update Docker composes
+#  include: launch_composes.yml
+#  when: plaform_type == 'testing'
 
 # Generate Docker compose script
-- name: Generate Docker compose script
-  include: generate_compose_script.yml
+#- name: Generate Docker compose script
+#  include: generate_compose_script.yml
 #  when: plaform_type == 'production'
 
 # Launch the remaining Docker composes

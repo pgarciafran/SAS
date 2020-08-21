@@ -45,13 +45,13 @@ docker_images:
 #      GIT_PASSWORD: 'GoXN7n6UFb'
 
   - repository: '/secandsys/docker-image-zabbix-agent.git'
-    branch: 'ref'
+    branch: 'master'
     directory: 'zabbix-agent'
     image_name: 'zabbix-agent'
     image_tag: 'v1-6-dev-5'
 
   - repository: '/secandsys/docker-image-zabbix-server-xxl.git'
-    branch: 'ref'
+    branch: 'master'
     directory: 'zabbix-server'
     image_name: 'zabbix-server'
     image_tag: 'v1-8'

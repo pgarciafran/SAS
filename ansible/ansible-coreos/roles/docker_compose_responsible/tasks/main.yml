@@ -13,18 +13,13 @@
   when: plaform_type == 'production'
 
 # Push images to Docker registry
-#- name: Push images to Docker registry
-#  include: push_images.yml
-#  when: plaform_type == 'production'
+- name: Push images to Docker registry
+  include: push_images.yml
+  when: plaform_type == 'production'
 
 # Launch the remaining Docker composes
 #- name: Run or update Docker composes
 #  include: launch_composes.yml
-#  when: plaform_type == 'production'
-
-# Generate Docker compose script
-#- name: Generate Docker compose script
-#  include: generate_compose_script.yml
 #  when: plaform_type == 'production'
 
 # Launch the remaining Docker composes

@@ -3,9 +3,9 @@
   include: download_git_repos.yml
 
 # Launch private Docker registry
-#- name: Launch private Docker registry
-#  include: registry.yml
-#  when: plaform_type == 'testing'
+- name: Launch private Docker registry
+  include: registry.yml
+  when: plaform_type == 'testing'
 
 # Build Docker images
 #- name: Build Docker images

@@ -3,46 +3,46 @@ registry_adress: "192.168.1.145:5000"
 
 docker_images:
   - repository: '/secandsys/docker-image-graylog.git'
-    branch: 'ref'
+    branch: 'master'
     directory: 'graylog'
     image_name: 'graylog'
     image_tag: 'v1-14'
 
   - repository: '/secandsys/docker-image-percona-official.git'
-    branch: 'ref'
+    branch: 'master'
     directory: 'percona'
     image_name: 'percona'
     image_tag: 'v1-1'
 
   - repository: '/secandsys/docker-image-proxy.git'
-    branch: 'ref'
+    branch: 'master'
     directory: 'proxy'
     image_name: 'proxy'
     image_tag: 'v1-4'
     build_args:
       PLATFORM: 'apptv.ch'
 
-  - repository: '/secandsys/docker-image-tcs.git'
-    branch: 'ref'
-    directory: 'tcs'
-    image_name: 'tcs'
-    image_tag: 'v2.8-1-dev'
-    build_args:
-      DEVEL: 1
-      TCS_VERSION: '2.8'
-      GIT_USER: 'Docker'
-      GIT_PASSWORD: 'GoXN7n6UFb'
+#  - repository: '/secandsys/docker-image-tcs.git'
+#    branch: 'ref'
+#    directory: 'tcs'
+#    image_name: 'tcs'
+#    image_tag: 'v2.8-1-dev'
+#    build_args:
+#      DEVEL: 1
+#      TCS_VERSION: '2.8'
+#      GIT_USER: 'Docker'
+#      GIT_PASSWORD: 'GoXN7n6UFb'
 
-  - repository: '/secandsys/docker-image-tcs.git'
-    branch: 'ref'
-    directory: 'tcs'
-    image_name: 'tcs'
-    image_tag: 'v2.8-1'
-    build_args:
-      DEVEL: 0
-      TCS_VERSION: '2.8'
-      GIT_USER: 'Docker'
-      GIT_PASSWORD: 'GoXN7n6UFb'
+#  - repository: '/secandsys/docker-image-tcs.git'
+#    branch: 'ref'
+#    directory: 'tcs'
+#    image_name: 'tcs'
+#    image_tag: 'v2.8-1'
+#    build_args:
+#      DEVEL: 0
+#      TCS_VERSION: '2.8'
+#      GIT_USER: 'Docker'
+#      GIT_PASSWORD: 'GoXN7n6UFb'
 
   - repository: '/secandsys/docker-image-zabbix-agent.git'
     branch: 'ref'

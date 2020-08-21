@@ -1,0 +1,10 @@
+/docker-compose-backup
+/docker-compose-databases
+/docker-compose-graylog
+/docker-compose-middlewares
+/docker-compose-registry
+/docker-compose-shipyard
+/docker-compose-web-services
+/docker-compose-zabbix
+
+/docker-images-

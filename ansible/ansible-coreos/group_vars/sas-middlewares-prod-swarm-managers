@@ -30,3 +30,8 @@ docker_composes:
     compose_args:
       SERVICE_ADDRESS: 192.168.1.145
       NODE: SAS-C1-S1
+
+  - compose_name: 'portainer'
+    repository: '/secandsys/docker-compose-portainer.git'
+    branch: 'master'
+    directory: 'portainer'

@@ -18,9 +18,9 @@
   when: plaform_type == 'production'
 
 # Launch the remaining Docker composes
-#- name: Run or update Docker composes
-#  include: launch_composes.yml
-#  when: plaform_type == 'production'
+- name: Run or update Docker composes
+  include: launch_composes.yml
+  when: plaform_type == 'production'
 
 # Launch the remaining Docker composes
 #- name: Launch the remaining Docker composes

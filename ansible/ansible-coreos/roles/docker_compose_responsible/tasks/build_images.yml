@@ -39,7 +39,7 @@
     name: "{{ registry_adress }}/{{ item.item.image_name }}"
     tag: "{{ item.item.image_tag }}"
     path: "{{ repo_directory_schema['docker_images_directory'] }}/{{ item.item.directory }}"
-    build.args: "{{ item.item.build_args | default(omit) }}"
+    buildargs: "{{ item.item.build_args | default(omit) }}"
 #    nocache: true
   with_items: "{{ git_images_repo_status.results }}"
 

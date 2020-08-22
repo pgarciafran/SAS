@@ -1,14 +1,14 @@
-- name: "Run/update platform composes as defined"
-  environment: "{{ item.compose_args }}"
-  ignore_errors: true
-  docker_service:
-    docker_host: "tcp://{{ service_ip }}:2377"
-    project_name: "{{ item.compose_project | default(omit) }}"
-    project_src: "{{ repo_directory_schema['docker_composes_directory'] }}/{{ item.directory }}"
-  with_items: "{{ docker_composes }}"
-  tags:
-    - compose
-  register: platform_status
+#- name: "Run/update platform composes as defined"
+#  environment: "{{ item.compose_args }}"
+#  ignore_errors: true
+#  docker_service:
+#    docker_host: "tcp://{{ service_ip }}:2377"
+#    project_name: "{{ item.compose_project | default(omit) }}"
+#    project_src: "{{ repo_directory_schema['docker_composes_directory'] }}/{{ item.directory }}"
+#  with_items: "{{ docker_composes }}"
+#  tags:
+#    - compose
+#  register: platform_status
 
   #- name: "Update platform composes (workaround for those problematic - i.e. use external ports) - 1st step - Down"
   # environment: "{{ item.item.compose_args }}"

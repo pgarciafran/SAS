@@ -7,7 +7,6 @@ data_directories:
   - /data/graylog/data/mongo
   - /data/graylog/data/elasticsearch
   - /data/graylog/data/journal
-  - /data/rethinkdb
   - /data/registry
   - /data/backup
   - /data/backup/databases

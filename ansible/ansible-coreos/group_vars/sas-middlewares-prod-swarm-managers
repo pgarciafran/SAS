@@ -3,27 +3,27 @@ registry_adress: "192.168.1.145:5000"
 
 docker_images:
 
-  - repository: '/secandsys/docker-image-proxy.git'
-    branch: 'master'
-    directory: 'proxy'
-    image_name: 'proxy'
-    image_tag: 'v0.2'
-    build_args:
-      PLATFORM: 'secandsys.com'
+#  - repository: '/secandsys/docker-image-proxy.git'
+#    branch: 'master'
+#    directory: 'proxy'
+#    image_name: 'proxy'
+#    image_tag: 'v1'
+#    build_args:
+#      PLATFORM: 'secandsys.com'
 
   - repository: '/secandsys/docker-image-mw.git'
     branch: 'master'
     directory: 'mw'
     image_name: 'mw'
-    image_tag: 'v0.1'
+    image_tag: 'v1'
     build_args:
       PLATFORM: 'secandsys.com'
 
-  - repository: '/secandsys/docker-image-percona-official.git'
-    branch: 'master'
-    directory: 'db'
-    image_name: 'db'
-    image_tag: 'v0.1'
+#  - repository: '/secandsys/docker-image-percona-official.git'
+#    branch: 'master'
+#    directory: 'db'
+#    image_name: 'db'
+#    image_tag: 'v0.1'
 
 docker_composes:
 
@@ -40,25 +40,25 @@ docker_composes:
     branch: 'master'
     directory: 'portainer'
 
-  - compose_name: 'proxies'
-    repository: '/secandsys/docker-compose-web-services.git'
-    branch: 'master'
-    directory: 'proxies'
-    compose_args:
-      PROXY_IMAGE_VERSION: v0.1
-      REGISTRY_HOST: 192.168.1.145
-      LOGGING_HOST: "127.0.0.1:20000"
-      NODE: SAS-C1-S1
-    scale:
-      proxy: 2
+#  - compose_name: 'proxies'
+#    repository: '/secandsys/docker-compose-web-services.git'
+#    branch: 'master'
+#    directory: 'proxies'
+#    compose_args:
+#      PROXY_IMAGE_VERSION: v1
+#      REGISTRY_HOST: 192.168.1.145
+#      LOGGING_HOST: "127.0.0.1:20000"
+#      NODE: SAS-C1-S1
+#    scale:
+#      proxy: 1
 
   - compose_name: 'mw'
     repository: '/secandsys/docker-compose-mw.git'
     branch: 'master'
     directory: 'mw'
 
-  - compose_name: 'db'
-    repository: '/secandsys/docker-compose-databases.git'
-    branch: 'master'
-    directory: 'db'
+#  - compose_name: 'db'
+#    repository: '/secandsys/docker-compose-databases.git'
+#    branch: 'master'
+#    directory: 'db'
 

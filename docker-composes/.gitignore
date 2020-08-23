@@ -1,7 +1,7 @@
 /docker-compose-backup
 /docker-compose-databases
 /docker-compose-graylog
-/docker-compose-middlewares
+/docker-compose-mw
 /docker-compose-registry
 /docker-compose-portainer
 /docker-compose-web-services

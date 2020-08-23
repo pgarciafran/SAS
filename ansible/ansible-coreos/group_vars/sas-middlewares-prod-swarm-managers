@@ -11,6 +11,13 @@ docker_images:
     build_args:
       PLATFORM: 'secandsys.com'
 
+  - repository: '/secandsys/docker-image-mw.git'
+    branch: 'master'
+    directory: 'mw'
+    image_name: 'mw'
+    image_tag: 'v0.1'
+    build_args:
+      PLATFORM: 'secandsys.com'
 
 docker_composes:
 
@@ -38,3 +45,9 @@ docker_composes:
       NODE: SAS-C1-S1
     scale:
       proxy: 2
+
+  - compose_name: 'mw'
+    repository: '/secandsys/docker-compose-mw.git'
+    branch: 'master'
+    directory: 'mw'
+

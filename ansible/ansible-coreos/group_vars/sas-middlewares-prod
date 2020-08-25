@@ -8,7 +8,7 @@ coreos_reboot_strategy: "off"
 coreos_update_group: stable
 
 platform_specific_data_directories:
- - /data/reports/sas
+ - /data/sas
 
 
 plaform_type: production

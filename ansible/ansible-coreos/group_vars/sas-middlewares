@@ -1,6 +1,6 @@
 data_directories:
   - /data
-  - /data/percona
+  - /data/postgres
 #  - /data/graylog
 #  - /data/graylog/config
 #  - /data/graylog/data

@@ -3,14 +3,6 @@ registry_adress: "192.168.1.145:5000"
 
 docker_images:
 
-  #- repository: '/secandsys/docker-image-proxy.git'
-  #  branch: 'master'
-  #  directory: 'proxy'
-  #  image_name: 'proxy'
-  #  image_tag: 'v1'
-  #  build_args:
-  #    PLATFORM: 'secandsys.com'
-
   - repository: '/secandsys/docker-image-mw.git'
     branch: 'master'
     directory: 'mw'
@@ -40,18 +32,6 @@ docker_composes:
     repository: '/secandsys/docker-compose-portainer.git'
     branch: 'master'
     directory: 'portainer'
-
-  #- compose_name: 'proxies'
-  #  repository: '/secandsys/docker-compose-web-services.git'
-  #  branch: 'master'
-  #  directory: 'proxies'
-  #  compose_args:
-  #    PROXY_IMAGE_VERSION: v1
-  #    REGISTRY_HOST: 192.168.1.145
-  #    LOGGING_HOST: "127.0.0.1:20000"
-  #    NODE: SAS-C1-S1
-  #  scale:
-  #   proxy: 1
 
   - compose_name: 'mw'
     repository: '/secandsys/docker-compose-mw.git'

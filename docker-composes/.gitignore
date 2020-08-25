@@ -1,4 +1,4 @@
-/docker-compose-backup
+/docker-compose-zabbix-agent
 /docker-compose-databases
 /docker-compose-graylog
 /docker-compose-mw

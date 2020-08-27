@@ -56,3 +56,12 @@ docker_composes:
     repository: '/secandsys/docker-compose-zabbix-agent.git'
     branch: 'master'
     directory: 'zabbix-agent'
+
+  - compose_name: 'proxies'
+    repository: '/secandsys/docker-compose-web-services.git'
+    branch: 'master'
+    directory: 'proxies'
+    compose_args:
+      PROXY_IMAGE_VERSION: v1-4
+      REGISTRY_HOST: 192.168.1.145
+      NODE: SAS-C1-S1

@@ -7,7 +7,7 @@ docker_images:
     branch: 'master'
     directory: 'mw'
     image_name: 'mw'
-    image_tag: 'final'
+    image_tag: 'p1'
     build_args:
       PLATFORM: 'secandsys.com'
 

@@ -6,3 +6,6 @@
 #- name: Generate cloud-config
 #  include: cloud_config.yml
 
+# Adds daemon.json to /etc/docker 
+- name: Add insecure registry to nodes
+  include: add_insecure_registry.yml

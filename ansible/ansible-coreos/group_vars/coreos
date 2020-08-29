@@ -1,5 +1,7 @@
 # coreos_prebootstrap and ansible-coreos-bootstrap specific variables
 coreos_pkg_home: "/opt/sas/python"
+# insecure_registry
+docker_insecure_registry: 192.168.1.145
 
 # Ansible specific group variables
 ansible_ssh_user: core

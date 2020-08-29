@@ -7,5 +7,5 @@
 #  include: cloud_config.yml
 
 # Adds daemon.json to /etc/docker 
-- name: Add insecure registry to nodes
+- name: Add daemon.json for insecure registry access from workers
   include: add_insecure_registry.yml

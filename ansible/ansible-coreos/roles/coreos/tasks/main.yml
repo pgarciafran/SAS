@@ -6,10 +6,3 @@
 #- name: Generate cloud-config
 #  include: cloud_config.yml
 
-# Adds daemon.json to /etc/docker
-- name: Includes daemon.json file in /etc/docker
-  template:
-    src: '{{ files/daemon.json }}'
-    dest: /etc/docker/daemon.json
-    mode: 0644
-  notify: restart docker

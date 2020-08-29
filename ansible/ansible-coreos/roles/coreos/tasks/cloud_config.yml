@@ -1,8 +1,8 @@
-- name: Deploy cloud-config YAML file
-  template: src=cloud-config.yml.j2 dest=/var/lib/coreos-install/user_data
-  become: true
-  become_user: root
-  register: node_restart
+#- name: Deploy cloud-config YAML file
+#  template: src=cloud-config.yml.j2 dest=/var/lib/coreos-install/user_data
+#  become: true
+#  become_user: root
+#  register: node_restart
 #  notify: Reload cloud-config
 
 #- name: Restart node after cloud-config update

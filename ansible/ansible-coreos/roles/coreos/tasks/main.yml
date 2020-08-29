@@ -6,10 +6,10 @@
 #- name: Generate cloud-config
 #  include: cloud_config.yml
 
-# Adds daemon.json to allow workers access registry
-#- name: Configure docker daemon.json file
-#  template:
-#    src: '{{ docker_daemon_options | to_nice_json }}'
-#    dest: /etc/docker/daemon.json
-#    mode: 0644
-#  notify: restart docker
+# Adds daemon.json to /etc/docker
+- name: Includes daemon.json file in /etc/docker
+  template:
+    src: '{{ files/daemon.json }}'
+    dest: /etc/docker/daemon.json
+    mode: 0644
+  notify: restart docker

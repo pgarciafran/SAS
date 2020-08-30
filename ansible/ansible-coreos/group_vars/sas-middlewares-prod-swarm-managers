@@ -11,6 +11,13 @@ docker_images:
     build_args:
       PLATFORM: 'secandsys.com'
 
+ - repository: '/secandsys/docker-image-databases.git'
+    branch: 'master'
+    directory: 'db'
+    image_name: 'db'
+    image_tag: 'secandsys'
+
+
 docker_composes:
 
   - compose_name: 'registry'

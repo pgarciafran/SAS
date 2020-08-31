@@ -15,7 +15,7 @@ docker_images:
     branch: 'master'
     directory: 'db'
     image_name: 'db'
-    image_tag: 'final'
+    image_tag: 'tfg'
 
 
 docker_composes:

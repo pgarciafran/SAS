@@ -47,17 +47,6 @@ docker_composes:
     repository: '/secandsys/docker-compose-zabbix.git'
     branch: 'master'
     directory: 'zabbix'
-    compose_args:
-      NODE: SAS-C1-C1
-      REGISTRY_HOST: 192.168.1.145
-      #LOGGING_HOST: "127.0.0.1:20000"
-      ZABBIX_SERVER_IMAGE_VERSION: v1-8
-      IPNETCOM_DOMAINNAME: zabbix.secandsys.com
-      ZS_DBUser: zabbix
-      ZS_DBPassword: broza
-      ZBX_HOST_PRIVATE_IP: 192.168.1.145
-    scale:
-      zabbix-server: 1
 
   - compose_name: 'zabbix-agent'
     repository: '/secandsys/docker-compose-zabbix-agent.git'

@@ -12,37 +12,38 @@ management_interface: vlan_management
 #public_ip: 170.253.11.170 
 #public_interface: eno51
 
-networks:
-  - name: vlans_private
-    interfaces:
-      - eno49
-    vlans:
-      - name: vlan_management
-        id: 2300
-        network:
-          name: management
-          address: 192.168.1.147/24
-          routes:
-            - destination: 192.168.255.0/24
-              gateway: 192.168.1.1
-      - name: vlan_service
-        id: 2302
-        network:
-          name: service
-          address: 192.168.249.12/24
-          routes:
-            - destination: 192.168.115.0/24
-              gateway: 192.168.249.254
-            - destination: 10.70.11.0/24
-              gateway: 192.168.249.251
-  - name: public
-    interfaces:
-      - eno51
-    network:
-      name: public
-      address: 170.253.11.170/27
-      gateway: 170.253.11.170 
-      dns:
-        - 8.8.8.8
-        - 8.8.4.4
+# Template for full networking configuration after test phase
+#networks:
+#  - name: vlans_private
+#    interfaces:
+#      - eno49
+#    vlans:
+#      - name: vlan_management
+#        id: 2300
+#        network:
+#          name: management
+#          address: 192.168.1.147/24
+#          routes:
+#            - destination: 192.168.255.0/24
+#              gateway: 192.168.1.1
+#      - name: vlan_service
+#        id: 2302
+#        network:
+#          name: service
+#          address: 192.168.249.12/24
+#          routes:
+#            - destination: 192.168.115.0/24
+#              gateway: 192.168.249.254
+#            - destination: 10.70.11.0/24
+#              gateway: 192.168.249.251
+#  - name: public
+#    interfaces:
+#      - eno51
+#    network:
+#      name: public
+#      address: 170.253.11.170/27
+#      gateway: 170.253.11.170 
+#      dns:
+#        - 8.8.8.8
+#        - 8.8.4.4
 

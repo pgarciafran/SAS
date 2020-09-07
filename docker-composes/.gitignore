@@ -6,3 +6,4 @@
 /docker-compose-portainer
 /docker-compose-web-services
 /docker-compose-zabbix
+/docker-compose-backup

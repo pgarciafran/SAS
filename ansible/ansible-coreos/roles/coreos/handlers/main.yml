@@ -1,5 +1,0 @@
-- name: Reload cloud-config
-  shell: coreos-cloudinit --from-file /var/lib/coreos-install/user_data
-  become: true
-  become_user: root
-

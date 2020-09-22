@@ -2,10 +2,6 @@
 - name: Add {{ coreos_pkg_home }}/bin to PATH environment variable
   include: add_python_to_PATH.yml
 
-# Generates the cloud-config and pushes into the server
-#- name: Generate cloud-config
-#  include: cloud_config.yml
-
 # Adds daemon.json to /etc/docker 
 - name: Add daemon.json for insecure registry access from workers
   include: add_insecure_registry.yml

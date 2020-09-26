@@ -61,3 +61,8 @@ docker_composes:
       PROXY_IMAGE_VERSION: v1-4
       REGISTRY_HOST: 192.168.1.145
       NODE: SAS-C1-S1
+
+  - compose_name: 'otrs'
+    repository: '/secandsys/docker-compose-otrs.git'
+    branch: 'master'
+    directory: 'otrs'
